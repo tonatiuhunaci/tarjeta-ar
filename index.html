@@ -3,21 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Tarjeta de Presentación AR</title>
+  <title>Tarjeta de Presentación AR - Hunaci Tonatiu</title>
 
-  <!-- Librerías de A-Frame y AR.js para WebAR -->
+  <!-- Librerías de A-Frame y AR.js para Realidad Aumentada -->
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
   <style>
-    /* Estilos de la interfaz 2D flotante */
     body {
       margin: 0;
       overflow: hidden;
       font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
-    /* Botones de acción directa en la pantalla del celular */
+    /* Botón flotante inferior */
     #ar-overlay {
       position: fixed;
       bottom: 25px;
@@ -25,14 +24,13 @@
       transform: translateX(-50%);
       z-index: 1000;
       display: flex;
-      gap: 12px;
-      width: 90%;
-      max-width: 360px;
       justify-content: center;
+      width: 90%;
+      max-width: 300px;
     }
 
     .btn-ar {
-      flex: 1;
+      width: 100%;
       text-align: center;
       background-color: #121820;
       color: #00FF88;
@@ -51,7 +49,7 @@
       color: #ffffff;
     }
 
-    /* Mensaje de instrucciones inicial */
+    /* Banners de instrucción */
     #instruction-banner {
       position: fixed;
       top: 15px;
@@ -76,47 +74,44 @@
     📷 Apunta la cámara al marcador Hiro
   </div>
 
-  <!-- Botones de acceso rápido a tus redes -->
+  <!-- Botón hacia tu GitHub -->
   <div id="ar-overlay">
-    <a href="https://linkedin.com" target="_blank" class="btn-ar">LinkedIn</a>
-    <a href="https://github.com" target="_blank" class="btn-ar">Portafolio</a>
+    <a href="https://github.com/tonatiuhunaci" target="_blank" class="btn-ar">Ver Perfil de GitHub</a>
   </div>
 
-  <!-- Escena 3D de AR.js -->
+  <!-- Escena AR -->
   <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix;">
 
-    <!-- Marcador Estándar HIRO -->
     <a-marker preset="hiro">
 
-      <!-- Base / Tarjeta Holográfica 3D -->
-      <a-plane position="0 0 0" rotation="-90 0 0" width="3.2" height="2.1" color="#121820" opacity="0.92"></a-plane>
-
-      <!-- Marco decorativo verde neón y azul -->
-      <a-plane position="0 0 -0.01" rotation="-90 0 0" width="3.28" height="2.18" color="#00FF88"></a-plane>
+      <!-- Base holográfica principal -->
+      <a-plane position="0 0 0" rotation="-90 0 0" width="3.6" height="2.2" color="#121820" opacity="0.92"></a-plane>
+      
+      <!-- Borde de acento verde neón -->
+      <a-plane position="0 0 -0.01" rotation="-90 0 0" width="3.68" height="2.28" color="#00FF88"></a-plane>
 
       <!-- Foto de Perfil (foto.jpg) -->
-      <a-image src="foto.jpg" position="-1.0 0.1 0" rotation="-90 0 0" width="0.85" height="0.85"></a-image>
+      <a-image src="foto.jpg" position="-1.2 0.1 0" rotation="-90 0 0" width="0.9" height="0.9"></a-image>
 
-      <!-- Textos 3D: Nombre y Especialidad -->
-      <a-text value="Tu Nombre Apellido" position="-0.4 0.1 -0.6" rotation="-90 0 0" color="#00FF88" width="4.8" font="roboto"></a-text>
-      <a-text value="Futuro Ing. Informatico" position="-0.4 0.1 -0.35" rotation="-90 0 0" color="#FFFFFF" width="3.6"></a-text>
+      <!-- Nombre completo y Especialidad -->
+      <a-text value="HUNACI TONATIU LOPEZ GONZALEZ" position="-0.5 0.1 -0.6" rotation="-90 0 0" color="#00FF88" width="4.2" font="roboto"></a-text>
+      <a-text value="ESTUDIANTE DE COMPUTACION" position="-0.5 0.1 -0.35" rotation="-90 0 0" color="#FFFFFF" width="3.5"></a-text>
       
-      <!-- Línea divisora decorativa -->
-      <a-plane position="0.3 0.1 -0.15" rotation="-90 0 0" width="2" height="0.02" color="#0066FF"></a-plane>
+      <!-- Línea azul divisora -->
+      <a-plane position="0.3 0.1 -0.15" rotation="-90 0 0" width="2.4" height="0.02" color="#0066FF"></a-plane>
 
-      <!-- Información de Contacto -->
-      <a-text value="Tel: +52 123 456 7890" position="-0.4 0.1 0.05" rotation="-90 0 0" color="#E0E0E0" width="3.2"></a-text>
-      <a-text value="Email: contacto@correo.com" position="-0.4 0.1 0.3" rotation="-90 0 0" color="#E0E0E0" width="3.2"></a-text>
-      <a-text value="Web: tu-portafolio.dev" position="-0.4 0.1 0.55" rotation="-90 0 0" color="#00FF88" width="3.2"></a-text>
+      <!-- Información de contacto extraída de la tarjeta -->
+      <a-text value="Tel: 4581181752" position="-0.5 0.1 0.1" rotation="-90 0 0" color="#E0E0E0" width="3.4"></a-text>
+      <a-text value="Email: lopeztonatiu134@gmail.com" position="-0.5 0.1 0.35" rotation="-90 0 0" color="#E0E0E0" width="3.2"></a-text>
+      <a-text value="GitHub: github.com/tonatiuhunaci" position="-0.5 0.1 0.6" rotation="-90 0 0" color="#0066FF" width="3.2"></a-text>
 
     </a-marker>
 
-    <!-- Cámara Virtual -->
     <a-entity camera></a-entity>
 
   </a-scene>
 
-  <!-- JavaScript para control de eventos de cámara -->
+  <!-- Lógica en JavaScript para el banner -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const marker = document.querySelector('a-marker');
