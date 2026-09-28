@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Tarjeta de Presentación AR - Hunaci Tonatiu</title>
 
+  <!-- Librerías de A-Frame y AR.js -->
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
@@ -70,21 +71,32 @@
 
   <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix;">
 
-    <a-marker preset="hiro">
+    <a-marker preset="hiro" id="hiro-marker">
 
-      <a-plane position="0 0 0" rotation="-90 0 0" width="3.6" height="2.2" color="#121820" opacity="0.92"></a-plane>
-      <a-plane position="0 0 -0.01" rotation="-90 0 0" width="3.68" height="2.28" color="#00FF88"></a-plane>
+      <!-- Contenedor con animación de deslizamiento (slide-in) -->
+      <a-entity id="card-container" 
+                position="0 1.5 0" 
+                animation="property: position; to: 0 0 0; dur: 800; easing: easeOutCubic; startEvents: slideIn">
 
-      <a-image src="foto.jpg" position="-1.2 0.1 0" rotation="-90 0 0" width="0.9" height="0.9"></a-image>
+        <!-- Plano base holográfico -->
+        <a-plane position="0 0 0" rotation="-90 0 0" width="3.6" height="2.2" color="#121820" opacity="0.92"></a-plane>
+        <a-plane position="0 0 -0.01" rotation="-90 0 0" width="3.68" height="2.28" color="#00FF88"></a-plane>
 
-      <a-text value="HUNACI TONATIU LOPEZ GONZALEZ" position="-0.5 0.1 -0.6" rotation="-90 0 0" color="#00FF88" width="4.2" font="roboto"></a-text>
-      <a-text value="ESTUDIANTE DE COMPUTACION" position="-0.5 0.1 -0.35" rotation="-90 0 0" color="#FFFFFF" width="3.5"></a-text>
-      
-      <a-plane position="0.3 0.1 -0.15" rotation="-90 0 0" width="2.4" height="0.02" color="#0066FF"></a-plane>
+        <!-- Foto de Perfil -->
+        <a-image src="foto.jpg" position="-1.2 0.1 0" rotation="-90 0 0" width="0.9" height="0.9"></a-image>
 
-      <a-text value="Tel: 4581181752" position="-0.5 0.1 0.1" rotation="-90 0 0" color="#E0E0E0" width="3.4"></a-text>
-      <a-text value="Email: lopeztonatiu134@gmail.com" position="-0.5 0.1 0.35" rotation="-90 0 0" color="#E0E0E0" width="3.2"></a-text>
-      <a-text value="GitHub: github.com/tonatiuhunaci" position="-0.5 0.1 0.6" rotation="-90 0 0" color="#0066FF" width="3.2"></a-text>
+        <!-- Nombre y Título -->
+        <a-text value="HUNACI TONATIU LOPEZ GONZALEZ" position="-0.5 0.1 -0.6" rotation="-90 0 0" color="#00FF88" width="4.2" font="roboto"></a-text>
+        <a-text value="ESTUDIANTE DE COMPUTACION" position="-0.5 0.1 -0.35" rotation="-90 0 0" color="#FFFFFF" width="3.5"></a-text>
+        
+        <a-plane position="0.3 0.1 -0.15" rotation="-90 0 0" width="2.4" height="0.02" color="#0066FF"></a-plane>
+
+        <!-- Datos de Contacto -->
+        <a-text value="Tel: 4581181752" position="-0.5 0.1 0.1" rotation="-90 0 0" color="#E0E0E0" width="3.4"></a-text>
+        <a-text value="Email: lopeztonatiu134@gmail.com" position="-0.5 0.1 0.35" rotation="-90 0 0" color="#E0E0E0" width="3.2"></a-text>
+        <a-text value="GitHub: github.com/tonatiuhunaci" position="-0.5 0.1 0.6" rotation="-90 0 0" color="#0066FF" width="3.2"></a-text>
+
+      </a-entity>
 
     </a-marker>
 
@@ -92,14 +104,20 @@
 
   </a-scene>
 
+  <!-- Control de Eventos y Deslizamiento con JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const marker = document.querySelector('a-marker');
+      const marker = document.getElementById('hiro-marker');
+      const cardContainer = document.getElementById('card-container');
       const banner = document.getElementById('instruction-banner');
 
       marker.addEventListener('markerFound', () => {
         banner.innerText = "¡Marcador detectado!";
         banner.style.borderColor = "#0066FF";
+        
+        // Reinicia la posición arriba y dispara la animación de deslizamiento
+        cardContainer.setAttribute('position', '0 1.5 0');
+        cardContainer.emit('slideIn');
       });
 
       marker.addEventListener('markerLost', () => {
